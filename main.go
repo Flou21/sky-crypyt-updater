@@ -115,7 +115,7 @@ func patch() {
 
 // patchCredentials configures the credentials for the git repository
 func patchCredentials() {
-	patchFile := "./patches/credentials.patch"
+	patchFile := "./creds/credentials.patch"
 	toPatchFile := fmt.Sprintf("%s%s", localSkycryptPath, "/src/credentials.js")
 
 	patch, err := os.Open(patchFile)
