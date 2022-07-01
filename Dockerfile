@@ -10,7 +10,7 @@ COPY . .
 
 RUN go build -o ./app .
 
-FROM gcr.io/distroless/base-debian11
+FROM debian:bookworm
 
 COPY --from=builder /build/app /app
 COPY ./patches /patches
