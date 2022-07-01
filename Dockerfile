@@ -13,5 +13,6 @@ RUN go build -o ./app .
 FROM gcr.io/distroless/base-debian11
 
 COPY --from=builder /build/app /app
+COPY ./patches /patches
 
 ENTRYPOINT ["/app"]
