@@ -1,0 +1,22 @@
+name: sky-crypt-updater
+autocreate: true
+image: golang:1.18.3-bullseye
+command: bash
+securityContext:
+  capabilities:
+    add:
+    - SYS_PTRACE
+volumes:
+- /go/pkg/
+- /root/.cache/go-build/
+sync:
+- .:/usr/src/app
+workdir: /usr/src/app
+persistentVolume:
+  enabled: false
+environment:
+- SKYCRYPT_FORK=<url_to_git_fork>
+- MINIO_BUCKET=<minio_bucket>
+- MINIO_HOST=<minio_host>
+- MINIO_ACCESS_ID=<minio_access_id>
+- MINIO_ACCESS_KEY=<minio_access_key>
