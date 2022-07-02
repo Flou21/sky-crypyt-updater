@@ -26,7 +26,7 @@ func main() {
 	clone()
 	defer deleteFork()
 
-	patch()
+	patches()
 
 	patchCredentials()
 
@@ -60,12 +60,28 @@ func deleteFork() {
 	}
 }
 
-// patch changes the coflnet specific patches
-func patch() {
+func patches() {
+	patchLinkToAhHistory()
+	patchDockerfile()
+}
+
+func patchLinkToAhHistory() {
 
 	patchFile := "./patches/add_link_to_ah_history.patch"
 	toPatchFile := fmt.Sprintf("%s%s", localSkycryptPath, "/views/stats.ejs")
 
+	patch(patchFile, toPatchFile)
+}
+
+func patchDockerfile() {
+	patchFile := "./patches/dockerfile.patch"
+	toPatchFile := fmt.Sprintf("%s%s", localSkycryptPath, "/Dockerfile")
+
+	patch(patchFile, toPatchFile)
+}
+
+// patch changes the coflnet specific patches
+func patch(patchFile, toPatchFile string) {
 	patch, err := os.Open(patchFile)
 
 	if err != nil {

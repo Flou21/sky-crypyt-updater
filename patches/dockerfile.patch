@@ -1,0 +1,21 @@
+Index: Dockerfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Dockerfile b/Dockerfile
+--- a/Dockerfile	(revision 3f88ff637fad808e5b9d97fd976225f63d28f959)
++++ b/Dockerfile	(date 1656780528463)
+@@ -1,6 +1,10 @@
+-FROM node:latest
++FROM node:lts-buster
++
+ RUN mkdir -p /usr/src/main
+ WORKDIR '/usr/src/main'
+ COPY . /usr/src/main
+-RUN npm ci && npm build
+ EXPOSE 32464
++
++RUN npm ci
++
++CMD npm run start
