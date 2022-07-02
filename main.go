@@ -9,6 +9,8 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/push"
 	"github.com/rs/zerolog/log"
 	"io/ioutil"
 	"os"
@@ -33,7 +35,9 @@ func main() {
 	pack()
 	defer deleteArchive()
 
-	push()
+	pushArtifact()
+
+	updateMetrics()
 }
 
 func clone() {
@@ -194,7 +198,7 @@ func pack() {
 }
 
 // push create a .tar.gz file and pushes it to minio
-func push() {
+func pushArtifact() {
 	client := minioClient()
 	bucket := os.Getenv("MINIO_BUCKET")
 
@@ -260,4 +264,29 @@ func deleteArchive() {
 	if err != nil {
 		log.Error().Err(err).Msgf("error deleting tar file: %s", tarFile)
 	}
+}
+
+func updateMetrics() {
+	completionTime := prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "db_backup_last_completion_timestamp_seconds",
+		Help: "The timestamp of the last successful completion of a DB backup.",
+	})
+	completionTime.SetToCurrentTime()
+
+	err := push.New(prometheusHost(), "sky_crypt_updater_patched").
+		Collector(completionTime).
+		Push()
+
+	if err != nil {
+		log.Panic().Err(err).Msgf("error pushing prometheus metrics")
+	}
+}
+
+func prometheusHost() string {
+	s := os.Getenv("PROMETHEUS_HOST")
+	if s == "" {
+		log.Panic().Msgf("PROMETHEUS_HOST is not set")
+		return ""
+	}
+	return s
 }
