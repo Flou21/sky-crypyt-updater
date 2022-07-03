@@ -37,7 +37,8 @@ func main() {
 
 	pushArtifact()
 
-	updateMetrics()
+	log.Warn().Msg("not sending metric, push gateway is not available yet")
+	// updateMetrics()
 }
 
 func clone() {
