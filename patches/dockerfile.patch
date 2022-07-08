@@ -4,18 +4,17 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
 diff --git a/Dockerfile b/Dockerfile
---- a/Dockerfile	(revision 3f88ff637fad808e5b9d97fd976225f63d28f959)
-+++ b/Dockerfile	(date 1656780528463)
-@@ -1,6 +1,10 @@
--FROM node:latest
+--- a/Dockerfile	(revision e1dc01b74b792e0b8001da67bb140fb759b63813)
++++ b/Dockerfile	(date 1657275140952)
+@@ -1,8 +1,7 @@
+-# syntax=docker/dockerfile:1
+-FROM node:current-slim
+-LABEL maintainer="SkyCrypt"
 +FROM node:lts-buster
-+
  RUN mkdir -p /usr/src/main
  WORKDIR '/usr/src/main'
  COPY . /usr/src/main
 -RUN npm ci && npm build
  EXPOSE 32464
-+
 +RUN npm ci
-+
 +CMD npm run start
