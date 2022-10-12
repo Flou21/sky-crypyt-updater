@@ -5,9 +5,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/bluekeyes/go-gitdiff/gitdiff"
-	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
-	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/push"
@@ -66,7 +64,7 @@ func deleteFork() {
 }
 
 func patches() {
-	patchLinkToAhHistory()
+	// patchLinkToAhHistory()
 	patchDockerfile()
 }
 
