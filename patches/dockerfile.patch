@@ -9,7 +9,7 @@ diff --git a/Dockerfile b/Dockerfile
 @@ -1,9 +1,10 @@
  # syntax=docker/dockerfile:1
 -FROM node:current-slim
-+FROM node:18-buster
++FROM node:16-buster
  LABEL maintainer="SkyCrypt"
  RUN mkdir -p /usr/src/main
  WORKDIR '/usr/src/main'
