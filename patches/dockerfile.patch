@@ -18,5 +18,6 @@ diff --git a/Dockerfile b/Dockerfile
 -RUN pnpm i && pnpm build
 +RUN pnpm i
 +RUN mkdir -p /usr/src/main/cache/json
++RUN mkdir -p /usr/src/main/public/resources/css
  EXPOSE 32464
 +CMD pnpm run start
