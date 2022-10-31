@@ -17,5 +17,6 @@ diff --git a/Dockerfile b/Dockerfile
  RUN npm install -g pnpm
 -RUN pnpm i && pnpm build
 +RUN pnpm i
++RUN mkdir -p /usr/src/main/cache/json
  EXPOSE 32464
 +CMD pnpm run start
