@@ -9,6 +9,6 @@ RUN go mod download
 
 COPY . .
 
-COPY ./patches /patches
+COPY ./patches/. /patches
 
 CMD ["go", "run", "main.go"]
