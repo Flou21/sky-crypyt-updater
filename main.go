@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"errors"
 	"github.com/bluekeyes/go-gitdiff/gitdiff"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
@@ -87,6 +88,13 @@ func patchDockerfile() {
 
 // patch changes the coflnet specific patches
 func patch(patchFile, toPatchFile string) {
+
+  fileExists := doesFileExist(patchFile)
+  if !fileExists {
+    log.Warn().Msgf("the file %s does not exist, can not apply patch", patchFile)
+    return
+  }
+
 	patch, err := os.Open(patchFile)
 
 	if err != nil {
@@ -290,4 +298,11 @@ func prometheusHost() string {
 		return ""
 	}
 	return s
+}
+
+func doesFileExist(path string) bool {
+  if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) {
+    return false
+  }
+  return true
 }
