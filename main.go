@@ -114,6 +114,10 @@ func patch(patchFile, toPatchFile string) {
 	if err != nil {
 		log.Panic().Err(err).Msgf("error parsing patch file: %s", patchFile)
 	}
+  if len(files) == 0 {
+    log.Warn().Msgf("cant patch file %s, skip it", patchFile)
+    return
+  }
 
 	toPatch, err := os.OpenFile(toPatchFile, os.O_CREATE|os.O_APPEND, os.ModePerm)
 	if err != nil {
