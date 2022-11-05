@@ -80,15 +80,14 @@ func patchLinkToAhHistory() {
 }
 
 func patchDockerfile() {
-	patchFile := "./patches/0002-overwrite-cmd-in-dockerfile.patch"
-	toPatchFile := fmt.Sprintf("%s%s", localSkycryptPath, "/Dockerfile")
-
+  patchFile := "./patches/0001-set-maintainer-label-to-coflnet.patch"
+  toPatchFile := fmt.Sprintf("%s%s", localSkycryptPath, "/Dockerfile")
 	patch(patchFile, toPatchFile)
 
-
-	patchFile = "./patches/0001-set-maintainer-label-to-coflnet.patch"
+	patchFile = "./patches/0002-overwrite-cmd-in-dockerfile.patch"
 	toPatchFile = fmt.Sprintf("%s%s", localSkycryptPath, "/Dockerfile")
 	patch(patchFile, toPatchFile)
+
 }
 
 // patch changes the coflnet specific patches
