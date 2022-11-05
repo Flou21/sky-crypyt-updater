@@ -1,0 +1,20 @@
+...
+o 903cb77e1 set maintainer label to coflnet
+   Dockerfile | 2 +-
+   1 file changed, 1 insertion(+), 1 deletion(-)
+  
+  diff --git a/Dockerfile b/Dockerfile
+  index ed0c683a0..22fd469cf 100644
+  --- a/Dockerfile
+  +++ b/Dockerfile
+  @@ -1,6 +1,6 @@
+   # syntax=docker/dockerfile:1
+   FROM node:current-slim
+  -LABEL maintainer="SkyCrypt"
+  +LABEL maintainer="Coflnet (SkyCrypt Fork)"
+   RUN mkdir -p /usr/src/main
+   WORKDIR '/usr/src/main'
+   COPY . /usr/src/main
+-- 
+2.38.1
+
