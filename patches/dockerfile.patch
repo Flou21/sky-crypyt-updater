@@ -15,6 +15,12 @@ o 903cb77e1 set maintainer label to coflnet
    RUN mkdir -p /usr/src/main
    WORKDIR '/usr/src/main'
    COPY . /usr/src/main
+   RUN npm install -g pnpm
+  -RUN pnpm i && pnpm build
+  +RUN pnpm i
+   EXPOSE 32464
+  +CMD pnpm run start
+
 -- 
 2.38.1
 
