@@ -1,0 +1,19 @@
+  4ac85fcba overwrite cmd in dockerfile
+   Dockerfile | 3 ++-
+   1 file changed, 2 insertions(+), 1 deletion(-)
+  
+  diff --git a/Dockerfile b/Dockerfile
+  index 22fd469cf..1c05c6833 100644
+  --- a/Dockerfile
+  +++ b/Dockerfile
+  @@ -5,5 +5,6 @@ RUN mkdir -p /usr/src/main
+   WORKDIR '/usr/src/main'
+   COPY . /usr/src/main
+   RUN npm install -g pnpm
+  -RUN pnpm i && pnpm build
+  +RUN pnpm i
+   EXPOSE 32464
+  +CMD pnpm run start
+-- 
+2.38.1
+

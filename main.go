@@ -80,9 +80,14 @@ func patchLinkToAhHistory() {
 }
 
 func patchDockerfile() {
-	patchFile := "./patches/dockerfile.patch"
+	patchFile := "./patches/0002-overwrite-cmd-in-dockerfile.patch"
 	toPatchFile := fmt.Sprintf("%s%s", localSkycryptPath, "/Dockerfile")
 
+	patch(patchFile, toPatchFile)
+
+
+	patchFile = "./patches/0001-set-maintainer-label-to-coflnet.patch"
+	toPatchFile = fmt.Sprintf("%s%s", localSkycryptPath, "/Dockerfile")
 	patch(patchFile, toPatchFile)
 }
 
@@ -94,6 +99,8 @@ func patch(patchFile, toPatchFile string) {
     log.Warn().Msgf("the file %s does not exist, can not apply patch", patchFile)
     return
   }
+
+  log.Info().Msgf("patch file %s exists; gonna patch the file %s" , patchFile, toPatchFile)
 
 	patch, err := os.Open(patchFile)
 
